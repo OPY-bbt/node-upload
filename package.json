@@ -1,0 +1,20 @@
+{
+  "name": "upload",
+  "version": "1.0.0",
+  "bin": "index.js",
+  "description": "demo node upload",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OPY-bbt/node-upload.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OPY-bbt/node-upload/issues"
+  },
+  "homepage": "https://github.com/OPY-bbt/node-upload#readme"
+}
