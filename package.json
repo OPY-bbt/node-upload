@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/OPY-bbt/node-upload/issues"
   },
-  "homepage": "https://github.com/OPY-bbt/node-upload#readme"
+  "homepage": "https://github.com/OPY-bbt/node-upload#readme",
+  "dependencies": {
+    "formidable": "^1.1.1"
+  }
 }
