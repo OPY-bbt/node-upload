@@ -7,6 +7,8 @@ const util = require('util');
 const localhost = '127.0.0.1';
 const port = '3000';
 
+const fileSavePath = __dirname + '/tmp';
+
 const html = `
   <!DOCTYPE html>
   <html>
@@ -15,8 +17,7 @@ const html = `
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   <body>
-    <form method="post" action="/file" enctype='multipart/form-data'>
-      <input type="text" name="name"><br>
+    <form method="post" action="/" enctype='multipart/form-data'>
       <label for="upload">上传文件</label>
       <input id="upload" type="file" name="file"/>
       <input type="submit" value="提交" />
@@ -33,18 +34,21 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (url === '/') {
+  if (url === '/' && req.method === 'GET') {
     res.end(html);
     return;
   }
 
+  if (!fs.existsSync(fileSavePath)) {
+    fs.mkdirSync(fileSavePath);
+  }
+
   const form = new formidable.IncomingForm();
   form.encoding = "utf-8";
-  form.uploadDir = __dirname + '/tmp';
+  form.uploadDir = fileSavePath;
   form.keepExtensions = true; 
   form.parse(req, function(err, fields, files) {
-    res.writeHead(200, {'content-type': 'text/plain'});
-    res.write('received upload:\n\n');
+    res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
     res.end(util.inspect({fields: fields, files: files}));
 
     fs.rename(files.file.path, `${__dirname}/tmp/${files.file.name}`, function (err) {
